@@ -1,0 +1,106 @@
+{
+  "/__docusaurus/debug-5ff": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---docusaurus-debugb-38-ad3"
+    }
+  },
+  "/__docusaurus/debug/config-5ba": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---docusaurus-debugb-38-ad3"
+    }
+  },
+  "/__docusaurus/debug/content-a2b": {
+    "__comp": "__comp---theme-debug-contentba-8-ce7",
+    "__context": {
+      "plugin": "plugin---docusaurus-debugb-38-ad3"
+    },
+    "__props": "__props---docusaurus-debug-content-3-c-0-be2"
+  },
+  "/__docusaurus/debug/globalData-c3c": {
+    "__comp": "__comp---theme-debug-global-dataede-0fa",
+    "__context": {
+      "plugin": "plugin---docusaurus-debugb-38-ad3"
+    }
+  },
+  "/__docusaurus/debug/metadata-156": {
+    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
+    "__context": {
+      "plugin": "plugin---docusaurus-debugb-38-ad3"
+    }
+  },
+  "/__docusaurus/debug/registry-88c": {
+    "__comp": "__comp---theme-debug-registry-679-501",
+    "__context": {
+      "plugin": "plugin---docusaurus-debugb-38-ad3"
+    }
+  },
+  "/__docusaurus/debug/routes-000": {
+    "__comp": "__comp---theme-debug-routes-946-699",
+    "__context": {
+      "plugin": "plugin---docusaurus-debugb-38-ad3"
+    }
+  },
+  "/-785": {
+    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
+    "__context": {
+      "plugin": "plugin---aba-d70"
+    }
+  },
+  "/-c54": {
+    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
+    "__props": "__props---22-d-307"
+  },
+  "/-fb5": {
+    "__comp": "__comp---theme-doc-roota-94-67a"
+  },
+  "/api/authentication-255": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---api-authenticationbae-6a4"
+  },
+  "/api/endpoints-6cf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---api-endpointsd-04-6ad"
+  },
+  "/api/models-d72": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---api-models-4-e-6-636"
+  },
+  "/architecture/database-669": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---architecture-databasef-6-d-125"
+  },
+  "/architecture/overview-4fe": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---architecture-overview-0-b-1-d38"
+  },
+  "/guides/deployment-c92": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---guides-deploymentcaa-f86"
+  },
+  "/guides/documentation-standards-8ee": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---guides-documentation-standards-783-f35"
+  },
+  "/guides/setup-e83": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---guides-setup-96-c-42d"
+  },
+  "/tron/agents-444": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---tron-agents-8-e-3-f31"
+  },
+  "/tron/api-481": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---tron-api-27-b-fdc"
+  },
+  "/tron/overview-ed3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---tron-overviewd-99-e1c"
+  },
+  "/-fc9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---0-e-3-279"
+  }
+}

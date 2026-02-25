@@ -1,0 +1,15 @@
+/Users/iultra/Documents/Imperium-App/app/macos/Pods/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/AppAuth/AppAuth.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/AppCheckCore/AppCheckCore.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/GTMAppAuth/GTMAppAuth.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/GTMSessionFetcher/GTMSessionFetcher.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/GoogleSignIn/GoogleSignIn.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/GoogleUtilities/GoogleUtilities.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/PromisesObjC/FBLPromises.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/file_selector_macos/file_selector_macos.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/flutter_secure_storage_macos/flutter_secure_storage_macos.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/path_provider_foundation/path_provider_foundation.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/shared_preferences_foundation/shared_preferences_foundation.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/sqlite3/sqlite3.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/sqlite3_flutter_libs/sqlite3_flutter_libs.framework
+/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Products/Debug/video_player_avfoundation/video_player_avfoundation.framework

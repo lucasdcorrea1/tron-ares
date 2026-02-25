@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/file_selector_macos-primary.dia",
+    "emit-module-dependencies" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/file_selector_macos-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/file_selector_macos-primary-emit-module.dia",
+    "pch" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/file_selector_macos-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/file_selector_macos-primary.swiftdeps"
+  },
+  "/Users/iultra/.pub-cache/hosted/pub.dev/file_selector_macos-0.9.4+4/macos/file_selector_macos/Sources/file_selector_macos/FileSelectorPlugin.swift" : {
+    "const-values" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/FileSelectorPlugin.swiftconstvalues",
+    "dependencies" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/FileSelectorPlugin.d",
+    "diagnostics" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/FileSelectorPlugin.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/FileSelectorPlugin.o",
+    "llvm-bc" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/FileSelectorPlugin.bc",
+    "object" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/FileSelectorPlugin.o",
+    "swift-dependencies" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/FileSelectorPlugin.swiftdeps",
+    "swiftmodule" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/FileSelectorPlugin~partial.swiftmodule"
+  },
+  "/Users/iultra/.pub-cache/hosted/pub.dev/file_selector_macos-0.9.4+4/macos/file_selector_macos/Sources/file_selector_macos/messages.g.swift" : {
+    "const-values" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/messages.g.swiftconstvalues",
+    "dependencies" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/messages.g.d",
+    "diagnostics" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/messages.g.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/messages.g.o",
+    "llvm-bc" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/messages.g.bc",
+    "object" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/messages.g.o",
+    "swift-dependencies" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/messages.g.swiftdeps",
+    "swiftmodule" : "/Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/file_selector_macos.build/Objects-normal/arm64/messages.g~partial.swiftmodule"
+  }
+}

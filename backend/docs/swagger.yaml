@@ -1,0 +1,2739 @@
+basePath: /api/v1
+definitions:
+  models.AddTronRepoRequest:
+    properties:
+      github_url:
+        type: string
+    type: object
+  models.AuthResponse:
+    properties:
+      profile:
+        $ref: '#/definitions/models.Profile'
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/models.UserResponse'
+    type: object
+  models.BalanceResponse:
+    properties:
+      balance:
+        type: number
+      total_expenses:
+        type: number
+      total_income:
+        type: number
+    type: object
+  models.BankProviderInfo:
+    properties:
+      color:
+        type: string
+      icon:
+        type: string
+      name:
+        type: string
+    type: object
+  models.CategoryStat:
+    properties:
+      amount:
+        type: number
+      category:
+        type: string
+      color:
+        type: string
+      percentage:
+        type: number
+    type: object
+  models.ComparisonStats:
+    properties:
+      expense_change:
+        description: Percentage change
+        type: number
+      income_change:
+        description: Percentage change
+        type: number
+      savings_change:
+        description: Percentage change
+        type: number
+    type: object
+  models.ConnectAccountRequest:
+    properties:
+      account_name:
+        type: string
+      account_type:
+        type: string
+      balance:
+        type: number
+      color:
+        type: string
+      icon:
+        type: string
+      last_four:
+        type: string
+      provider:
+        type: string
+    type: object
+  models.ConnectedAccount:
+    properties:
+      account_name:
+        description: User-defined name
+        type: string
+      account_type:
+        description: '"checking", "savings", "credit"'
+        type: string
+      balance:
+        description: Current balance
+        type: number
+      color:
+        description: Hex color for UI
+        type: string
+      created_at:
+        type: string
+      icon:
+        description: Icon identifier
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      last_four:
+        description: Last 4 digits
+        type: string
+      last_sync:
+        type: string
+      provider:
+        description: '"nubank", "itau", "bradesco", etc'
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.CreateTransactionRequest:
+    properties:
+      amount:
+        type: number
+      category:
+        $ref: '#/definitions/models.TransactionCategory'
+      date:
+        type: string
+      description:
+        type: string
+      type:
+        $ref: '#/definitions/models.TransactionType'
+    type: object
+  models.CreateTronDirectiveRequest:
+    properties:
+      content:
+        type: string
+      expires_at:
+        type: string
+      priority:
+        $ref: '#/definitions/models.TronDirectivePriority'
+      repo_id:
+        description: If scope is repo
+        type: string
+      scope:
+        $ref: '#/definitions/models.TronDirectiveScope'
+    type: object
+  models.CreateTronProjectRequest:
+    properties:
+      daily_budget:
+        type: number
+      description:
+        type: string
+      frequency:
+        $ref: '#/definitions/models.TronFrequency'
+      name:
+        type: string
+      references:
+        items:
+          type: string
+        type: array
+    type: object
+  models.CreateTronRepoRequest:
+    properties:
+      description:
+        type: string
+      features:
+        description: Initial features to scaffold
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      private:
+        type: boolean
+      stack:
+        description: '"go-api", "flutter-app", "nextjs-web", etc'
+        type: string
+    type: object
+  models.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.MonthlyTrendPoint:
+    properties:
+      balance:
+        type: number
+      expenses:
+        type: number
+      income:
+        type: number
+      month:
+        description: '"2024-01", "2024-02", etc'
+        type: string
+    type: object
+  models.Profile:
+    properties:
+      avatar:
+        type: string
+      bio:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      settings:
+        $ref: '#/definitions/models.ProfileSettings'
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.ProfileSettings:
+    properties:
+      currency:
+        type: string
+      date_format:
+        description: '"DD/MM/YYYY", "MM/DD/YYYY", etc'
+        type: string
+      first_day_of_week:
+        description: 0=Sunday, 1=Monday
+        type: integer
+      language:
+        type: string
+      theme:
+        $ref: '#/definitions/models.ThemeSettings'
+    type: object
+  models.ProfileStats:
+    properties:
+      comparison_last_month:
+        $ref: '#/definitions/models.ComparisonStats'
+      connected_accounts:
+        type: integer
+      expenses_by_category:
+        items:
+          $ref: '#/definitions/models.CategoryStat'
+        type: array
+      monthly_expenses:
+        type: number
+      monthly_income:
+        type: number
+      monthly_savings:
+        type: number
+      monthly_trend:
+        items:
+          $ref: '#/definitions/models.MonthlyTrendPoint'
+        type: array
+      top_categories:
+        items:
+          $ref: '#/definitions/models.CategoryStat'
+        type: array
+      total_balance:
+        type: number
+      transaction_count:
+        type: integer
+    type: object
+  models.RegisterRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    type: object
+  models.ResolveDecisionRequest:
+    properties:
+      comment:
+        type: string
+      option_id:
+        type: string
+    type: object
+  models.ThemeSettings:
+    properties:
+      accent_color:
+        description: Hex color for accents
+        type: string
+      mode:
+        description: '"dark", "light", "system"'
+        type: string
+      primary_color:
+        description: 'Hex color, default: #D4AF37 (gold)'
+        type: string
+    type: object
+  models.Transaction:
+    properties:
+      amount:
+        type: number
+      category:
+        $ref: '#/definitions/models.TransactionCategory'
+      created_at:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      type:
+        $ref: '#/definitions/models.TransactionType'
+      user_id:
+        type: string
+    type: object
+  models.TransactionCategory:
+    enum:
+    - food
+    - transport
+    - housing
+    - leisure
+    - health
+    - education
+    - salary
+    - freelance
+    - other
+    type: string
+    x-enum-varnames:
+    - CategoryFood
+    - CategoryTransport
+    - CategoryHousing
+    - CategoryLeisure
+    - CategoryHealth
+    - CategoryEducation
+    - CategorySalary
+    - CategoryFreelance
+    - CategoryOther
+  models.TransactionType:
+    enum:
+    - income
+    - expense
+    type: string
+    x-enum-varnames:
+    - Income
+    - Expense
+  models.TronAgentLog:
+    properties:
+      action:
+        description: e.g., "generate_task", "implement", "review"
+        type: string
+      agent_type:
+        $ref: '#/definitions/models.TronAgentType'
+      created_at:
+        type: string
+      error:
+        type: string
+      full_prompt:
+        description: For debugging
+        type: string
+      full_response:
+        description: For debugging
+        type: string
+      id:
+        type: string
+      input_summary:
+        type: string
+      metrics:
+        $ref: '#/definitions/models.TronAgentLogMetrics'
+      output_summary:
+        type: string
+      project_id:
+        type: string
+      reasoning:
+        description: Agent's reasoning
+        type: string
+      repo_id:
+        type: string
+      success:
+        type: boolean
+      task_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.TronAgentLogListResponse:
+    properties:
+      limit:
+        type: integer
+      logs:
+        items:
+          $ref: '#/definitions/models.TronAgentLog'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  models.TronAgentLogMetrics:
+    properties:
+      cost_usd:
+        type: number
+      duration_ms:
+        type: integer
+      model:
+        description: claude-sonnet-4-5-20250929, etc
+        type: string
+      tokens_input:
+        type: integer
+      tokens_output:
+        type: integer
+    type: object
+  models.TronAgentMetrics:
+    properties:
+      agent_type:
+        $ref: '#/definitions/models.TronAgentType'
+      avg_duration_ms:
+        type: integer
+      success_rate:
+        description: Percentage
+        type: number
+      total_cost_usd:
+        type: number
+      total_runs:
+        type: integer
+      total_tokens:
+        type: integer
+    type: object
+  models.TronAgentStatus:
+    properties:
+      agent_type:
+        $ref: '#/definitions/models.TronAgentType'
+      avg_duration_ms:
+        type: integer
+      failed_runs:
+        type: integer
+      is_running:
+        type: boolean
+      last_run_at:
+        type: string
+      last_run_success:
+        type: boolean
+      successful_runs:
+        type: integer
+      total_cost_usd:
+        type: number
+      total_runs:
+        type: integer
+      total_tokens:
+        type: integer
+    type: object
+  models.TronAgentType:
+    enum:
+    - orchestrator
+    - board
+    - pm
+    - dev
+    - qa
+    - integration
+    type: string
+    x-enum-varnames:
+    - AgentTypeOrchestrator
+    - AgentTypeBoard
+    - AgentTypePM
+    - AgentTypeDev
+    - AgentTypeQA
+    - AgentTypeIntegration
+  models.TronAgentsStatusResponse:
+    properties:
+      agents:
+        items:
+          $ref: '#/definitions/models.TronAgentStatus'
+        type: array
+      cycle_running:
+        type: boolean
+      next_cycle_at:
+        type: string
+    type: object
+  models.TronDailyMetrics:
+    properties:
+      commits:
+        type: integer
+      cost_usd:
+        type: number
+      date:
+        description: YYYY-MM-DD
+        type: string
+      tasks_completed:
+        type: integer
+    type: object
+  models.TronDecision:
+    properties:
+      agent_type:
+        $ref: '#/definitions/models.TronAgentType'
+      chosen_option:
+        type: string
+      context:
+        description: Additional context
+        type: string
+      created_at:
+        type: string
+      default_option:
+        description: Which option to use on timeout
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      level:
+        $ref: '#/definitions/models.TronDecisionLevel'
+      options:
+        items:
+          $ref: '#/definitions/models.TronDecisionOption'
+        type: array
+      project_id:
+        type: string
+      repo_id:
+        type: string
+      resolved_at:
+        type: string
+      resolved_by:
+        description: '"user" or "timeout" or "auto"'
+        type: string
+      status:
+        $ref: '#/definitions/models.TronDecisionStatus'
+      task_id:
+        type: string
+      timeout_at:
+        description: When to auto-resolve
+        type: string
+      title:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.TronDecisionLevel:
+    enum:
+    - 1
+    - 2
+    - 3
+    type: integer
+    x-enum-comments:
+      DecisionLevelCritical: Critical, needs attention
+      DecisionLevelInfo: Just informational
+      DecisionLevelNormal: Normal decision
+    x-enum-descriptions:
+    - Just informational
+    - Normal decision
+    - Critical, needs attention
+    x-enum-varnames:
+    - DecisionLevelInfo
+    - DecisionLevelNormal
+    - DecisionLevelCritical
+  models.TronDecisionListResponse:
+    properties:
+      decisions:
+        items:
+          $ref: '#/definitions/models.TronDecision'
+        type: array
+      pending:
+        type: integer
+      total:
+        type: integer
+    type: object
+  models.TronDecisionOption:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      impact:
+        description: What happens if chosen
+        type: string
+      is_default:
+        description: Used if timeout
+        type: boolean
+      label:
+        type: string
+    type: object
+  models.TronDecisionStatus:
+    enum:
+    - pending
+    - approved
+    - rejected
+    - timeout
+    - auto
+    type: string
+    x-enum-comments:
+      DecisionStatusAuto: Automatically resolved
+      DecisionStatusTimeout: Auto-resolved by default
+    x-enum-descriptions:
+    - ""
+    - ""
+    - ""
+    - Auto-resolved by default
+    - Automatically resolved
+    x-enum-varnames:
+    - DecisionStatusPending
+    - DecisionStatusApproved
+    - DecisionStatusRejected
+    - DecisionStatusTimeout
+    - DecisionStatusAuto
+  models.TronDirective:
+    properties:
+      active:
+        type: boolean
+      content:
+        description: The directive text
+        type: string
+      created_at:
+        type: string
+      expires_at:
+        description: Optional expiration
+        type: string
+      id:
+        type: string
+      priority:
+        $ref: '#/definitions/models.TronDirectivePriority'
+      project_id:
+        type: string
+      repo_id:
+        description: If scope is repo
+        type: string
+      scope:
+        $ref: '#/definitions/models.TronDirectiveScope'
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.TronDirectiveListResponse:
+    properties:
+      active:
+        type: integer
+      directives:
+        items:
+          $ref: '#/definitions/models.TronDirective'
+        type: array
+      total:
+        type: integer
+    type: object
+  models.TronDirectivePriority:
+    enum:
+    - normal
+    - high
+    - critical
+    type: string
+    x-enum-varnames:
+    - DirectivePriorityNormal
+    - DirectivePriorityHigh
+    - DirectivePriorityCritical
+  models.TronDirectiveScope:
+    enum:
+    - project
+    - repo
+    type: string
+    x-enum-comments:
+      DirectiveScopeProject: Applies to all repos
+      DirectiveScopeRepo: Applies to specific repo
+    x-enum-descriptions:
+    - Applies to all repos
+    - Applies to specific repo
+    x-enum-varnames:
+    - DirectiveScopeProject
+    - DirectiveScopeRepo
+  models.TronFrequency:
+    enum:
+    - normal
+    - high
+    - low
+    type: string
+    x-enum-varnames:
+    - FrequencyNormal
+    - FrequencyHigh
+    - FrequencyLow
+  models.TronMetricsResponse:
+    properties:
+      by_agent:
+        items:
+          $ref: '#/definitions/models.TronAgentMetrics'
+        type: array
+      by_repo:
+        items:
+          $ref: '#/definitions/models.TronRepoMetrics'
+        type: array
+      daily:
+        description: Last 30 days
+        items:
+          $ref: '#/definitions/models.TronDailyMetrics'
+        type: array
+      month:
+        $ref: '#/definitions/models.TronMetricsSummary'
+      today:
+        $ref: '#/definitions/models.TronMetricsSummary'
+      week:
+        $ref: '#/definitions/models.TronMetricsSummary'
+    type: object
+  models.TronMetricsSummary:
+    properties:
+      approval_rate:
+        description: Percentage
+        type: number
+      avg_cost_per_task:
+        type: number
+      commits_streak:
+        description: Days
+        type: integer
+      commits_total:
+        type: integer
+      period:
+        description: '"today", "week", "month"'
+        type: string
+      tasks_completed:
+        type: integer
+      tasks_rejected:
+        type: integer
+      total_cost_usd:
+        type: number
+      total_tokens:
+        type: integer
+    type: object
+  models.TronProject:
+    properties:
+      created_at:
+        type: string
+      daily_budget:
+        description: Max daily spend in USD
+        type: number
+      description:
+        type: string
+      directives:
+        description: IDs of TronDirective
+        items:
+          type: string
+        type: array
+      frequency:
+        allOf:
+        - $ref: '#/definitions/models.TronFrequency'
+        description: How often to run cycles
+      id:
+        type: string
+      is_active:
+        description: Whether agents should run
+        type: boolean
+      name:
+        type: string
+      references:
+        description: Market references (competitor URLs)
+        items:
+          type: string
+        type: array
+      repos:
+        description: IDs of TronRepo
+        items:
+          type: string
+        type: array
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.TronProjectResponse:
+    properties:
+      active_directive:
+        type: string
+      commits_today:
+        type: integer
+      created_at:
+        type: string
+      daily_budget:
+        description: Max daily spend in USD
+        type: number
+      description:
+        type: string
+      directives:
+        description: IDs of TronDirective
+        items:
+          type: string
+        type: array
+      frequency:
+        allOf:
+        - $ref: '#/definitions/models.TronFrequency'
+        description: How often to run cycles
+      id:
+        type: string
+      is_active:
+        description: Whether agents should run
+        type: boolean
+      name:
+        type: string
+      references:
+        description: Market references (competitor URLs)
+        items:
+          type: string
+        type: array
+      repos:
+        description: IDs of TronRepo
+        items:
+          type: string
+        type: array
+      repos_count:
+        type: integer
+      tasks_completed:
+        type: integer
+      tasks_in_backlog:
+        type: integer
+      today_cost_usd:
+        type: number
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.TronQAChecks:
+    properties:
+      build_passed:
+        type: boolean
+      coverage_change:
+        description: Positive or negative
+        type: number
+      linter_clean:
+        type: boolean
+      tests_passed:
+        type: boolean
+    type: object
+  models.TronQAIssue:
+    properties:
+      file:
+        type: string
+      issue:
+        type: string
+      line:
+        type: integer
+      severity:
+        description: minor, major
+        type: string
+    type: object
+  models.TronQAResult:
+    properties:
+      checks:
+        $ref: '#/definitions/models.TronQAChecks'
+      feedback:
+        type: string
+      issues:
+        items:
+          $ref: '#/definitions/models.TronQAIssue'
+        type: array
+      result:
+        description: APPROVED, NEEDS_FIX, REJECTED
+        type: string
+      reviewed_at:
+        type: string
+    type: object
+  models.TronRepo:
+    properties:
+      analysis:
+        $ref: '#/definitions/models.TronRepoAnalysis'
+      claude_md_exists:
+        description: Has CLAUDE.md file
+        type: boolean
+      commits_streak:
+        description: Days with consecutive commits
+        type: integer
+      created_at:
+        type: string
+      current_version:
+        type: string
+      dependencies:
+        description: Other repos this depends on
+        items:
+          type: string
+        type: array
+      github_url:
+        type: string
+      health:
+        $ref: '#/definitions/models.TronRepoHealth'
+      id:
+        type: string
+      last_analyzed_at:
+        type: string
+      last_commit_at:
+        type: string
+      local_path:
+        description: Path where repo is cloned
+        type: string
+      name:
+        type: string
+      project_id:
+        type: string
+      stack:
+        $ref: '#/definitions/models.TronStack'
+      test_coverage:
+        type: number
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.TronRepoAnalysis:
+    properties:
+      analyzed_at:
+        type: string
+      dependencies:
+        additionalProperties:
+          type: string
+        description: Major dependencies
+        type: object
+      endpoints:
+        description: Detected API endpoints
+        items:
+          type: string
+        type: array
+      features:
+        description: Detected features
+        items:
+          type: string
+        type: array
+      file_count:
+        description: Total files
+        type: integer
+      lines_of_code:
+        description: Total LOC
+        type: integer
+      models:
+        description: Detected models/entities
+        items:
+          type: string
+        type: array
+      patterns:
+        description: Detected patterns (MVC, Clean Arch, etc)
+        items:
+          type: string
+        type: array
+      summary:
+        description: AI-generated summary
+        type: string
+      test_files:
+        description: Number of test files
+        type: integer
+      todos:
+        description: Found TODOs/FIXMEs
+        items:
+          type: string
+        type: array
+    type: object
+  models.TronRepoHealth:
+    enum:
+    - green
+    - yellow
+    - red
+    type: string
+    x-enum-varnames:
+    - HealthGreen
+    - HealthYellow
+    - HealthRed
+  models.TronRepoMetrics:
+    properties:
+      commits_total:
+        type: integer
+      cost_usd:
+        type: number
+      health:
+        $ref: '#/definitions/models.TronRepoHealth'
+      repo_id:
+        type: string
+      repo_name:
+        type: string
+      tasks_completed:
+        type: integer
+    type: object
+  models.TronRepoResponse:
+    properties:
+      analysis:
+        $ref: '#/definitions/models.TronRepoAnalysis'
+      claude_md_exists:
+        description: Has CLAUDE.md file
+        type: boolean
+      commits_streak:
+        description: Days with consecutive commits
+        type: integer
+      created_at:
+        type: string
+      current_version:
+        type: string
+      dependencies:
+        description: Other repos this depends on
+        items:
+          type: string
+        type: array
+      github_url:
+        type: string
+      health:
+        $ref: '#/definitions/models.TronRepoHealth'
+      id:
+        type: string
+      last_analyzed_at:
+        type: string
+      last_commit_at:
+        type: string
+      local_path:
+        description: Path where repo is cloned
+        type: string
+      name:
+        type: string
+      project_id:
+        type: string
+      stack:
+        $ref: '#/definitions/models.TronStack'
+      tasks_completed:
+        type: integer
+      tasks_in_backlog:
+        type: integer
+      tasks_in_dev:
+        type: integer
+      test_coverage:
+        type: number
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.TronSourceLens:
+    enum:
+    - market
+    - expansion
+    - persona
+    - code
+    - integration
+    - directive
+    type: string
+    x-enum-comments:
+      LensCode: Code analysis (debt, tests)
+      LensDirective: CIO directive
+      LensExpansion: Expand from last feature
+      LensIntegration: Cross-repo update
+      LensMarket: Mirror market reference
+      LensPersona: User persona perspective
+    x-enum-descriptions:
+    - Mirror market reference
+    - Expand from last feature
+    - User persona perspective
+    - Code analysis (debt, tests)
+    - Cross-repo update
+    - CIO directive
+    x-enum-varnames:
+    - LensMarket
+    - LensExpansion
+    - LensPersona
+    - LensCode
+    - LensIntegration
+    - LensDirective
+  models.TronStack:
+    properties:
+      database:
+        description: mongodb, postgres, mysql, etc
+        type: string
+      framework:
+        description: gin, nextjs, flutter, fastapi, etc
+        type: string
+      language:
+        description: go, typescript, dart, python, etc
+        type: string
+      tools:
+        description: docker, kubernetes, github-actions, etc
+        items:
+          type: string
+        type: array
+    type: object
+  models.TronTask:
+    properties:
+      branch_name:
+        type: string
+      commits:
+        items:
+          $ref: '#/definitions/models.TronTaskCommit'
+        type: array
+      completed_at:
+        type: string
+      cost_usd:
+        description: Total cost of this task
+        type: number
+      created_at:
+        type: string
+      depends_on:
+        items:
+          type: string
+        type: array
+      description:
+        type: string
+      dev_attempts:
+        description: Max 3
+        type: integer
+      estimated_size:
+        $ref: '#/definitions/models.TronTaskSize'
+      id:
+        type: string
+      priority:
+        $ref: '#/definitions/models.TronTaskPriority'
+      project_id:
+        type: string
+      qa_result:
+        $ref: '#/definitions/models.TronQAResult'
+      reasoning:
+        description: Why this task was generated
+        type: string
+      repo_id:
+        type: string
+      source_lens:
+        $ref: '#/definitions/models.TronSourceLens'
+      spec:
+        $ref: '#/definitions/models.TronTaskSpec'
+      started_at:
+        type: string
+      status:
+        $ref: '#/definitions/models.TronTaskStatus'
+      title:
+        type: string
+      tokens_used:
+        type: integer
+      unlocks:
+        description: What this task enables
+        items:
+          type: string
+        type: array
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.TronTaskCommit:
+    properties:
+      additions:
+        type: integer
+      created_at:
+        type: string
+      deletions:
+        type: integer
+      files_changed:
+        type: integer
+      message:
+        type: string
+      sha:
+        type: string
+    type: object
+  models.TronTaskListResponse:
+    properties:
+      limit:
+        type: integer
+      page:
+        type: integer
+      tasks:
+        items:
+          $ref: '#/definitions/models.TronTask'
+        type: array
+      total:
+        type: integer
+    type: object
+  models.TronTaskPriority:
+    enum:
+    - low
+    - normal
+    - high
+    - critical
+    type: string
+    x-enum-varnames:
+    - PriorityLow
+    - PriorityNormal
+    - PriorityHigh
+    - PriorityCritical
+  models.TronTaskSize:
+    enum:
+    - small
+    - medium
+    - large
+    type: string
+    x-enum-comments:
+      TaskSizeLarge: 4+ commits
+      TaskSizeMedium: 2-3 commits
+      TaskSizeSmall: 1 commit
+    x-enum-descriptions:
+    - 1 commit
+    - 2-3 commits
+    - 4+ commits
+    x-enum-varnames:
+    - TaskSizeSmall
+    - TaskSizeMedium
+    - TaskSizeLarge
+  models.TronTaskSpec:
+    properties:
+      acceptance_criteria:
+        items:
+          type: string
+        type: array
+      edge_cases:
+        items:
+          type: string
+        type: array
+      files_to_create:
+        items:
+          type: string
+        type: array
+      files_to_modify:
+        items:
+          type: string
+        type: array
+      tests_required:
+        type: boolean
+      what:
+        type: string
+    type: object
+  models.TronTaskStatus:
+    enum:
+    - backlog
+    - ready
+    - in_dev
+    - in_review
+    - done
+    - rejected
+    type: string
+    x-enum-comments:
+      TaskStatusReady: Approved by PM, ready for dev
+    x-enum-descriptions:
+    - ""
+    - Approved by PM, ready for dev
+    - ""
+    - ""
+    - ""
+    - ""
+    x-enum-varnames:
+    - TaskStatusBacklog
+    - TaskStatusReady
+    - TaskStatusInDev
+    - TaskStatusInReview
+    - TaskStatusDone
+    - TaskStatusRejected
+  models.UpdateConnectedAccountRequest:
+    properties:
+      account_name:
+        type: string
+      balance:
+        type: number
+      color:
+        type: string
+      icon:
+        type: string
+      is_active:
+        type: boolean
+    type: object
+  models.UpdateProfileRequest:
+    properties:
+      avatar:
+        type: string
+      bio:
+        type: string
+      name:
+        type: string
+      settings:
+        $ref: '#/definitions/models.ProfileSettings'
+    type: object
+  models.UpdateTransactionRequest:
+    properties:
+      amount:
+        type: number
+      category:
+        $ref: '#/definitions/models.TransactionCategory'
+      date:
+        type: string
+      description:
+        type: string
+      type:
+        $ref: '#/definitions/models.TransactionType'
+    type: object
+  models.UpdateTronProjectRequest:
+    properties:
+      daily_budget:
+        type: number
+      description:
+        type: string
+      frequency:
+        $ref: '#/definitions/models.TronFrequency'
+      is_active:
+        type: boolean
+      name:
+        type: string
+      references:
+        items:
+          type: string
+        type: array
+    type: object
+  models.UpdateTronTaskRequest:
+    properties:
+      priority:
+        $ref: '#/definitions/models.TronTaskPriority'
+      status:
+        $ref: '#/definitions/models.TronTaskStatus'
+    type: object
+  models.UserResponse:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API de controle financeiro pessoal com autenticação JWT
+  title: Imperium API
+  version: "1.0"
+paths:
+  /accounts:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todas as contas bancárias conectadas do usuário
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ConnectedAccount'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Listar contas conectadas
+      tags:
+      - accounts
+    post:
+      consumes:
+      - application/json
+      description: Adiciona uma nova conta bancária ao perfil do usuário
+      parameters:
+      - description: Dados da conta
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ConnectAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.ConnectedAccount'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Conectar nova conta
+      tags:
+      - accounts
+  /accounts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove uma conta conectada do perfil do usuário
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Account not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Remover conta conectada
+      tags:
+      - accounts
+    get:
+      consumes:
+      - application/json
+      description: Retorna detalhes de uma conta conectada específica
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ConnectedAccount'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Account not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Obter conta conectada
+      tags:
+      - accounts
+    put:
+      consumes:
+      - application/json
+      description: Atualiza os dados de uma conta conectada
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Dados para atualizar
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateConnectedAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ConnectedAccount'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Account not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Atualizar conta conectada
+      tags:
+      - accounts
+  /accounts/{id}/sync:
+    post:
+      consumes:
+      - application/json
+      description: Atualiza o saldo de uma conta conectada
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Novo saldo
+        in: body
+        name: request
+        required: true
+        schema:
+          additionalProperties:
+            format: float64
+            type: number
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ConnectedAccount'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Account not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Sincronizar saldo da conta
+      tags:
+      - accounts
+  /accounts/providers:
+    get:
+      consumes:
+      - application/json
+      description: Retorna a lista de bancos disponíveis para conexão
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/models.BankProviderInfo'
+            type: object
+      summary: Listar bancos disponíveis
+      tags:
+      - accounts
+  /accounts/summary:
+    get:
+      consumes:
+      - application/json
+      description: Retorna um resumo consolidado de todas as contas conectadas
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Resumo de todas as contas
+      tags:
+      - accounts
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Autentica usuário com email e senha
+      parameters:
+      - description: Dados de login
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AuthResponse'
+        "400":
+          description: Invalid request body
+          schema:
+            type: string
+        "401":
+          description: Invalid credentials
+          schema:
+            type: string
+      summary: Login de usuário
+      tags:
+      - auth
+  /auth/me:
+    get:
+      consumes:
+      - application/json
+      description: Retorna informações do usuário autenticado
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AuthResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Dados do usuário logado
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Cria uma nova conta com email e senha
+      parameters:
+      - description: Dados de registro
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.AuthResponse'
+        "400":
+          description: Invalid request body
+          schema:
+            type: string
+        "409":
+          description: Email already exists
+          schema:
+            type: string
+      summary: Registrar novo usuário
+      tags:
+      - auth
+  /profile:
+    get:
+      consumes:
+      - application/json
+      description: Retorna o perfil do usuário autenticado
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Profile'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Profile not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Buscar perfil do usuário
+      tags:
+      - profile
+    put:
+      consumes:
+      - application/json
+      description: Atualiza os dados do perfil do usuário autenticado
+      parameters:
+      - description: Dados para atualizar
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Profile'
+        "400":
+          description: Invalid request body
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Profile not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Atualizar perfil do usuário
+      tags:
+      - profile
+  /profile/avatar:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Faz upload de uma imagem para o avatar do usuário. A imagem é redimensionada
+        para 256x256 e comprimida.
+      parameters:
+      - description: Imagem do avatar (PNG ou JPEG, max 5MB)
+        in: formData
+        name: avatar
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Profile'
+        "400":
+          description: Invalid image
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "413":
+          description: Image too large
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Upload de foto de perfil
+      tags:
+      - profile
+  /profile/stats:
+    get:
+      consumes:
+      - application/json
+      description: Retorna estatísticas financeiras do usuário para exibição em gráficos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProfileStats'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Obter estatísticas do perfil
+      tags:
+      - profile
+  /profile/stats/breakdown:
+    get:
+      consumes:
+      - application/json
+      description: Retorna despesas detalhadas por categoria com sub-categorias
+      parameters:
+      - default: month
+        description: 'Período: ''week'', ''month'', ''year'', ''all'''
+        in: query
+        name: period
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Obter breakdown de despesas
+      tags:
+      - profile
+  /profile/stats/daily:
+    get:
+      consumes:
+      - application/json
+      description: Retorna dados de gastos/receitas por dia para gráfico de barras
+      parameters:
+      - default: 30
+        description: Número de dias
+        in: query
+        name: days
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Obter estatísticas diárias
+      tags:
+      - profile
+  /profile/stats/income:
+    get:
+      consumes:
+      - application/json
+      description: Retorna receitas detalhadas por categoria
+      parameters:
+      - default: month
+        description: 'Período: ''week'', ''month'', ''year'', ''all'''
+        in: query
+        name: period
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Obter breakdown de receitas
+      tags:
+      - profile
+  /transactions:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todas as transações do usuário ordenadas por data (mais
+        recente primeiro)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Transaction'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Lista todas as transações
+      tags:
+      - transactions
+    post:
+      consumes:
+      - application/json
+      description: Adiciona uma nova transação (receita ou despesa)
+      parameters:
+      - description: Dados da transação
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Transaction'
+        "400":
+          description: Invalid request body
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Cria uma nova transação
+      tags:
+      - transactions
+  /transactions/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove uma transação pelo ID
+      parameters:
+      - description: Transaction ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Invalid ID
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Transaction not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Deleta uma transação
+      tags:
+      - transactions
+    get:
+      consumes:
+      - application/json
+      description: Retorna uma transação específica pelo seu ID
+      parameters:
+      - description: Transaction ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Transaction'
+        "400":
+          description: Invalid ID
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Transaction not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Busca uma transação por ID
+      tags:
+      - transactions
+    put:
+      consumes:
+      - application/json
+      description: Atualiza os dados de uma transação existente
+      parameters:
+      - description: Transaction ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Dados para atualizar
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Transaction'
+        "400":
+          description: Invalid ID or request body
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Transaction not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Atualiza uma transação
+      tags:
+      - transactions
+  /transactions/balance:
+    get:
+      consumes:
+      - application/json
+      description: Calcula o saldo total (receitas - despesas) do usuário
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BalanceResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Retorna o saldo atual
+      tags:
+      - transactions
+  /tron/decisions/{did}/resolve:
+    post:
+      consumes:
+      - application/json
+      description: CIO resolves a pending decision by choosing an option
+      parameters:
+      - description: Decision ID
+        in: path
+        name: did
+        required: true
+        type: string
+      - description: Resolution
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ResolveDecisionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronDecision'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Resolve a decision
+      tags:
+      - tron-decisions
+  /tron/projects:
+    get:
+      consumes:
+      - application/json
+      description: Returns all TRON projects for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.TronProjectResponse'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List all TRON projects
+      tags:
+      - tron-projects
+    post:
+      consumes:
+      - application/json
+      description: Creates a new TRON project for the authenticated user
+      parameters:
+      - description: Project data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTronProjectRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.TronProject'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Create a new TRON project
+      tags:
+      - tron-projects
+  /tron/projects/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a specific TRON project and all associated data
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Delete a TRON project
+      tags:
+      - tron-projects
+    get:
+      consumes:
+      - application/json
+      description: Returns a specific TRON project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronProjectResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Get a TRON project by ID
+      tags:
+      - tron-projects
+    put:
+      consumes:
+      - application/json
+      description: Updates a specific TRON project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateTronProjectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronProject'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Update a TRON project
+      tags:
+      - tron-projects
+  /tron/projects/{id}/agents:
+    get:
+      consumes:
+      - application/json
+      description: Returns the current status and metrics of all TRON agents
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronAgentsStatusResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Get status of all agents
+      tags:
+      - tron-agents
+  /tron/projects/{id}/agents/run:
+    post:
+      consumes:
+      - application/json
+      description: Manually triggers a full agent cycle for the project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Cycle started
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Manually trigger an agent cycle
+      tags:
+      - tron-agents
+  /tron/projects/{id}/decisions:
+    get:
+      consumes:
+      - application/json
+      description: Returns all decisions requiring CIO input
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Filter by status (pending, approved, rejected)
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronDecisionListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List decisions for a project
+      tags:
+      - tron-decisions
+  /tron/projects/{id}/directives:
+    get:
+      consumes:
+      - application/json
+      description: Returns all CIO directives for a project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Filter by active status
+        in: query
+        name: active
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronDirectiveListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List directives for a project
+      tags:
+      - tron-directives
+    post:
+      consumes:
+      - application/json
+      description: CIO creates a new strategic directive for the project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Directive data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTronDirectiveRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.TronDirective'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Create a new directive
+      tags:
+      - tron-directives
+  /tron/projects/{id}/logs:
+    get:
+      consumes:
+      - application/json
+      description: Returns agent activity logs for a TRON project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Filter by agent type
+        in: query
+        name: agent_type
+        type: string
+      - description: Filter by success status
+        in: query
+        name: success
+        type: boolean
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 50
+        description: Items per page
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronAgentLogListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List agent logs for a project
+      tags:
+      - tron-logs
+  /tron/projects/{id}/metrics:
+    get:
+      consumes:
+      - application/json
+      description: Returns aggregated metrics for a TRON project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronMetricsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Get metrics for a project
+      tags:
+      - tron-metrics
+  /tron/projects/{id}/metrics/daily:
+    get:
+      consumes:
+      - application/json
+      description: Returns daily metrics for the last 30 days
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.TronDailyMetrics'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Get daily metrics breakdown
+      tags:
+      - tron-metrics
+  /tron/projects/{id}/repos:
+    get:
+      consumes:
+      - application/json
+      description: Returns all repos for a specific TRON project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.TronRepoResponse'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List repos in a project
+      tags:
+      - tron-repos
+    post:
+      consumes:
+      - application/json
+      description: Imports an existing GitHub repository to a TRON project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Repo URL
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.AddTronRepoRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.TronRepo'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Add an existing GitHub repo to a project
+      tags:
+      - tron-repos
+  /tron/projects/{id}/repos/{rid}/analyze:
+    post:
+      consumes:
+      - application/json
+      description: Triggers AI analysis of the repository to detect stack, features,
+        etc
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Repo ID
+        in: path
+        name: rid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronRepo'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Trigger analysis of a repo
+      tags:
+      - tron-repos
+  /tron/projects/{id}/repos/new:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new GitHub repository with scaffold based on stack
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: New repo data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTronRepoRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.TronRepo'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Create a new repo from scratch
+      tags:
+      - tron-repos
+  /tron/projects/{id}/tasks:
+    get:
+      consumes:
+      - application/json
+      description: Returns all tasks for a specific TRON project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Filter by status
+        in: query
+        name: status
+        type: string
+      - description: Filter by repo ID
+        in: query
+        name: repo_id
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 50
+        description: Items per page
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronTaskListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List tasks for a project
+      tags:
+      - tron-tasks
+  /tron/projects/{id}/ws:
+    get:
+      consumes:
+      - application/json
+      description: Establishes a WebSocket connection for real-time project updates
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - BearerAuth: []
+      summary: WebSocket endpoint for real-time updates
+      tags:
+      - tron-websocket
+  /tron/tasks/{tid}:
+    get:
+      consumes:
+      - application/json
+      description: Returns details of a specific task
+      parameters:
+      - description: Task ID
+        in: path
+        name: tid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronTask'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Get a specific task
+      tags:
+      - tron-tasks
+    patch:
+      consumes:
+      - application/json
+      description: Updates status or priority of a task
+      parameters:
+      - description: Task ID
+        in: path
+        name: tid
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateTronTaskRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TronTask'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Update a task
+      tags:
+      - tron-tasks
+securityDefinitions:
+  BearerAuth:
+    description: 'Digite: Bearer {seu_token_aqui}'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

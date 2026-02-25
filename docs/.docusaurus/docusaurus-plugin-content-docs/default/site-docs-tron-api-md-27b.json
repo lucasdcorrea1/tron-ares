@@ -1,0 +1,17 @@
+{
+  "id": "tron/api",
+  "title": "TRON API Reference",
+  "description": "Base URL//localhost:8080/api/v1/tron",
+  "source": "@site/docs/tron/api.md",
+  "sourceDirName": "tron",
+  "slug": "/tron/api",
+  "permalink": "/tron/api",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  }
+}

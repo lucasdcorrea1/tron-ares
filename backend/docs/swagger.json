@@ -1,0 +1,4138 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API de controle financeiro pessoal com autenticação JWT",
+        "title": "Imperium API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/accounts": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna todas as contas bancárias conectadas do usuário",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Listar contas conectadas",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ConnectedAccount"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Adiciona uma nova conta bancária ao perfil do usuário",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Conectar nova conta",
+                "parameters": [
+                    {
+                        "description": "Dados da conta",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ConnectAccountRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.ConnectedAccount"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accounts/providers": {
+            "get": {
+                "description": "Retorna a lista de bancos disponíveis para conexão",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Listar bancos disponíveis",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/models.BankProviderInfo"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accounts/summary": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna um resumo consolidado de todas as contas conectadas",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Resumo de todas as contas",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accounts/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna detalhes de uma conta conectada específica",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Obter conta conectada",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Account ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ConnectedAccount"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Account not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Atualiza os dados de uma conta conectada",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Atualizar conta conectada",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Account ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Dados para atualizar",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateConnectedAccountRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ConnectedAccount"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Account not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Remove uma conta conectada do perfil do usuário",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Remover conta conectada",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Account ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Account not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accounts/{id}/sync": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Atualiza o saldo de uma conta conectada",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Sincronizar saldo da conta",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Account ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Novo saldo",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "number",
+                                "format": "float64"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ConnectedAccount"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Account not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "description": "Autentica usuário com email e senha",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login de usuário",
+                "parameters": [
+                    {
+                        "description": "Dados de login",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.AuthResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/me": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna informações do usuário autenticado",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Dados do usuário logado",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.AuthResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "description": "Cria uma nova conta com email e senha",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Registrar novo usuário",
+                "parameters": [
+                    {
+                        "description": "Dados de registro",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.AuthResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "Email already exists",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna o perfil do usuário autenticado",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profile"
+                ],
+                "summary": "Buscar perfil do usuário",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Profile"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Profile not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Atualiza os dados do perfil do usuário autenticado",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profile"
+                ],
+                "summary": "Atualizar perfil do usuário",
+                "parameters": [
+                    {
+                        "description": "Dados para atualizar",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateProfileRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Profile"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Profile not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile/avatar": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Faz upload de uma imagem para o avatar do usuário. A imagem é redimensionada para 256x256 e comprimida.",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profile"
+                ],
+                "summary": "Upload de foto de perfil",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "Imagem do avatar (PNG ou JPEG, max 5MB)",
+                        "name": "avatar",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Profile"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid image",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "413": {
+                        "description": "Image too large",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile/stats": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna estatísticas financeiras do usuário para exibição em gráficos",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profile"
+                ],
+                "summary": "Obter estatísticas do perfil",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ProfileStats"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile/stats/breakdown": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna despesas detalhadas por categoria com sub-categorias",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profile"
+                ],
+                "summary": "Obter breakdown de despesas",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "month",
+                        "description": "Período: 'week', 'month', 'year', 'all'",
+                        "name": "period",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile/stats/daily": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna dados de gastos/receitas por dia para gráfico de barras",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profile"
+                ],
+                "summary": "Obter estatísticas diárias",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 30,
+                        "description": "Número de dias",
+                        "name": "days",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/profile/stats/income": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna receitas detalhadas por categoria",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profile"
+                ],
+                "summary": "Obter breakdown de receitas",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "month",
+                        "description": "Período: 'week', 'month', 'year', 'all'",
+                        "name": "period",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna todas as transações do usuário ordenadas por data (mais recente primeiro)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Lista todas as transações",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Transaction"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Adiciona uma nova transação (receita ou despesa)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Cria uma nova transação",
+                "parameters": [
+                    {
+                        "description": "Dados da transação",
+                        "name": "transaction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/balance": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Calcula o saldo total (receitas - despesas) do usuário",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Retorna o saldo atual",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BalanceResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna uma transação específica pelo seu ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Busca uma transação por ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Transaction ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Transaction not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Atualiza os dados de uma transação existente",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Atualiza uma transação",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Transaction ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Dados para atualizar",
+                        "name": "transaction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID or request body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Transaction not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Remove uma transação pelo ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Deleta uma transação",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Transaction ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Invalid ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Transaction not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/decisions/{did}/resolve": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "CIO resolves a pending decision by choosing an option",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-decisions"
+                ],
+                "summary": "Resolve a decision",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Decision ID",
+                        "name": "did",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Resolution",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ResolveDecisionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronDecision"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns all TRON projects for the authenticated user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-projects"
+                ],
+                "summary": "List all TRON projects",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.TronProjectResponse"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates a new TRON project for the authenticated user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-projects"
+                ],
+                "summary": "Create a new TRON project",
+                "parameters": [
+                    {
+                        "description": "Project data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateTronProjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronProject"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns a specific TRON project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-projects"
+                ],
+                "summary": "Get a TRON project by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronProjectResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Updates a specific TRON project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-projects"
+                ],
+                "summary": "Update a TRON project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateTronProjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronProject"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Deletes a specific TRON project and all associated data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-projects"
+                ],
+                "summary": "Delete a TRON project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/agents": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns the current status and metrics of all TRON agents",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-agents"
+                ],
+                "summary": "Get status of all agents",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronAgentsStatusResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/agents/run": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Manually triggers a full agent cycle for the project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-agents"
+                ],
+                "summary": "Manually trigger an agent cycle",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Cycle started",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/decisions": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns all decisions requiring CIO input",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-decisions"
+                ],
+                "summary": "List decisions for a project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by status (pending, approved, rejected)",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronDecisionListResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/directives": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns all CIO directives for a project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-directives"
+                ],
+                "summary": "List directives for a project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Filter by active status",
+                        "name": "active",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronDirectiveListResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "CIO creates a new strategic directive for the project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-directives"
+                ],
+                "summary": "Create a new directive",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Directive data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateTronDirectiveRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronDirective"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/logs": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns agent activity logs for a TRON project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-logs"
+                ],
+                "summary": "List agent logs for a project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by agent type",
+                        "name": "agent_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Filter by success status",
+                        "name": "success",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 50,
+                        "description": "Items per page",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronAgentLogListResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/metrics": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns aggregated metrics for a TRON project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-metrics"
+                ],
+                "summary": "Get metrics for a project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronMetricsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/metrics/daily": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns daily metrics for the last 30 days",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-metrics"
+                ],
+                "summary": "Get daily metrics breakdown",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.TronDailyMetrics"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/repos": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns all repos for a specific TRON project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-repos"
+                ],
+                "summary": "List repos in a project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.TronRepoResponse"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Imports an existing GitHub repository to a TRON project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-repos"
+                ],
+                "summary": "Add an existing GitHub repo to a project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Repo URL",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.AddTronRepoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronRepo"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/repos/new": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates a new GitHub repository with scaffold based on stack",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-repos"
+                ],
+                "summary": "Create a new repo from scratch",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "New repo data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateTronRepoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronRepo"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/repos/{rid}/analyze": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Triggers AI analysis of the repository to detect stack, features, etc",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-repos"
+                ],
+                "summary": "Trigger analysis of a repo",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Repo ID",
+                        "name": "rid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronRepo"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/tasks": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns all tasks for a specific TRON project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-tasks"
+                ],
+                "summary": "List tasks for a project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by repo ID",
+                        "name": "repo_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 50,
+                        "description": "Items per page",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronTaskListResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tron/projects/{id}/ws": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Establishes a WebSocket connection for real-time project updates",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-websocket"
+                ],
+                "summary": "WebSocket endpoint for real-time updates",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/tron/tasks/{tid}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns details of a specific task",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-tasks"
+                ],
+                "summary": "Get a specific task",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Task ID",
+                        "name": "tid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronTask"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Updates status or priority of a task",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tron-tasks"
+                ],
+                "summary": "Update a task",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Task ID",
+                        "name": "tid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateTronTaskRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TronTask"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.AddTronRepoRequest": {
+            "type": "object",
+            "properties": {
+                "github_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.AuthResponse": {
+            "type": "object",
+            "properties": {
+                "profile": {
+                    "$ref": "#/definitions/models.Profile"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.UserResponse"
+                }
+            }
+        },
+        "models.BalanceResponse": {
+            "type": "object",
+            "properties": {
+                "balance": {
+                    "type": "number"
+                },
+                "total_expenses": {
+                    "type": "number"
+                },
+                "total_income": {
+                    "type": "number"
+                }
+            }
+        },
+        "models.BankProviderInfo": {
+            "type": "object",
+            "properties": {
+                "color": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.CategoryStat": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "percentage": {
+                    "type": "number"
+                }
+            }
+        },
+        "models.ComparisonStats": {
+            "type": "object",
+            "properties": {
+                "expense_change": {
+                    "description": "Percentage change",
+                    "type": "number"
+                },
+                "income_change": {
+                    "description": "Percentage change",
+                    "type": "number"
+                },
+                "savings_change": {
+                    "description": "Percentage change",
+                    "type": "number"
+                }
+            }
+        },
+        "models.ConnectAccountRequest": {
+            "type": "object",
+            "properties": {
+                "account_name": {
+                    "type": "string"
+                },
+                "account_type": {
+                    "type": "string"
+                },
+                "balance": {
+                    "type": "number"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "last_four": {
+                    "type": "string"
+                },
+                "provider": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ConnectedAccount": {
+            "type": "object",
+            "properties": {
+                "account_name": {
+                    "description": "User-defined name",
+                    "type": "string"
+                },
+                "account_type": {
+                    "description": "\"checking\", \"savings\", \"credit\"",
+                    "type": "string"
+                },
+                "balance": {
+                    "description": "Current balance",
+                    "type": "number"
+                },
+                "color": {
+                    "description": "Hex color for UI",
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "Icon identifier",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "last_four": {
+                    "description": "Last 4 digits",
+                    "type": "string"
+                },
+                "last_sync": {
+                    "type": "string"
+                },
+                "provider": {
+                    "description": "\"nubank\", \"itau\", \"bradesco\", etc",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.CreateTransactionRequest": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "category": {
+                    "$ref": "#/definitions/models.TransactionCategory"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/models.TransactionType"
+                }
+            }
+        },
+        "models.CreateTronDirectiveRequest": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "expires_at": {
+                    "type": "string"
+                },
+                "priority": {
+                    "$ref": "#/definitions/models.TronDirectivePriority"
+                },
+                "repo_id": {
+                    "description": "If scope is repo",
+                    "type": "string"
+                },
+                "scope": {
+                    "$ref": "#/definitions/models.TronDirectiveScope"
+                }
+            }
+        },
+        "models.CreateTronProjectRequest": {
+            "type": "object",
+            "properties": {
+                "daily_budget": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "frequency": {
+                    "$ref": "#/definitions/models.TronFrequency"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "references": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "models.CreateTronRepoRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "features": {
+                    "description": "Initial features to scaffold",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "private": {
+                    "type": "boolean"
+                },
+                "stack": {
+                    "description": "\"go-api\", \"flutter-app\", \"nextjs-web\", etc",
+                    "type": "string"
+                }
+            }
+        },
+        "models.LoginRequest": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.MonthlyTrendPoint": {
+            "type": "object",
+            "properties": {
+                "balance": {
+                    "type": "number"
+                },
+                "expenses": {
+                    "type": "number"
+                },
+                "income": {
+                    "type": "number"
+                },
+                "month": {
+                    "description": "\"2024-01\", \"2024-02\", etc",
+                    "type": "string"
+                }
+            }
+        },
+        "models.Profile": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "bio": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "settings": {
+                    "$ref": "#/definitions/models.ProfileSettings"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ProfileSettings": {
+            "type": "object",
+            "properties": {
+                "currency": {
+                    "type": "string"
+                },
+                "date_format": {
+                    "description": "\"DD/MM/YYYY\", \"MM/DD/YYYY\", etc",
+                    "type": "string"
+                },
+                "first_day_of_week": {
+                    "description": "0=Sunday, 1=Monday",
+                    "type": "integer"
+                },
+                "language": {
+                    "type": "string"
+                },
+                "theme": {
+                    "$ref": "#/definitions/models.ThemeSettings"
+                }
+            }
+        },
+        "models.ProfileStats": {
+            "type": "object",
+            "properties": {
+                "comparison_last_month": {
+                    "$ref": "#/definitions/models.ComparisonStats"
+                },
+                "connected_accounts": {
+                    "type": "integer"
+                },
+                "expenses_by_category": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.CategoryStat"
+                    }
+                },
+                "monthly_expenses": {
+                    "type": "number"
+                },
+                "monthly_income": {
+                    "type": "number"
+                },
+                "monthly_savings": {
+                    "type": "number"
+                },
+                "monthly_trend": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.MonthlyTrendPoint"
+                    }
+                },
+                "top_categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.CategoryStat"
+                    }
+                },
+                "total_balance": {
+                    "type": "number"
+                },
+                "transaction_count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.RegisterRequest": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ResolveDecisionRequest": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "option_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ThemeSettings": {
+            "type": "object",
+            "properties": {
+                "accent_color": {
+                    "description": "Hex color for accents",
+                    "type": "string"
+                },
+                "mode": {
+                    "description": "\"dark\", \"light\", \"system\"",
+                    "type": "string"
+                },
+                "primary_color": {
+                    "description": "Hex color, default: #D4AF37 (gold)",
+                    "type": "string"
+                }
+            }
+        },
+        "models.Transaction": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "category": {
+                    "$ref": "#/definitions/models.TransactionCategory"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/models.TransactionType"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TransactionCategory": {
+            "type": "string",
+            "enum": [
+                "food",
+                "transport",
+                "housing",
+                "leisure",
+                "health",
+                "education",
+                "salary",
+                "freelance",
+                "other"
+            ],
+            "x-enum-varnames": [
+                "CategoryFood",
+                "CategoryTransport",
+                "CategoryHousing",
+                "CategoryLeisure",
+                "CategoryHealth",
+                "CategoryEducation",
+                "CategorySalary",
+                "CategoryFreelance",
+                "CategoryOther"
+            ]
+        },
+        "models.TransactionType": {
+            "type": "string",
+            "enum": [
+                "income",
+                "expense"
+            ],
+            "x-enum-varnames": [
+                "Income",
+                "Expense"
+            ]
+        },
+        "models.TronAgentLog": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "description": "e.g., \"generate_task\", \"implement\", \"review\"",
+                    "type": "string"
+                },
+                "agent_type": {
+                    "$ref": "#/definitions/models.TronAgentType"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "full_prompt": {
+                    "description": "For debugging",
+                    "type": "string"
+                },
+                "full_response": {
+                    "description": "For debugging",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "input_summary": {
+                    "type": "string"
+                },
+                "metrics": {
+                    "$ref": "#/definitions/models.TronAgentLogMetrics"
+                },
+                "output_summary": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "string"
+                },
+                "reasoning": {
+                    "description": "Agent's reasoning",
+                    "type": "string"
+                },
+                "repo_id": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                },
+                "task_id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronAgentLogListResponse": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "logs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronAgentLog"
+                    }
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronAgentLogMetrics": {
+            "type": "object",
+            "properties": {
+                "cost_usd": {
+                    "type": "number"
+                },
+                "duration_ms": {
+                    "type": "integer"
+                },
+                "model": {
+                    "description": "claude-sonnet-4-5-20250929, etc",
+                    "type": "string"
+                },
+                "tokens_input": {
+                    "type": "integer"
+                },
+                "tokens_output": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronAgentMetrics": {
+            "type": "object",
+            "properties": {
+                "agent_type": {
+                    "$ref": "#/definitions/models.TronAgentType"
+                },
+                "avg_duration_ms": {
+                    "type": "integer"
+                },
+                "success_rate": {
+                    "description": "Percentage",
+                    "type": "number"
+                },
+                "total_cost_usd": {
+                    "type": "number"
+                },
+                "total_runs": {
+                    "type": "integer"
+                },
+                "total_tokens": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronAgentStatus": {
+            "type": "object",
+            "properties": {
+                "agent_type": {
+                    "$ref": "#/definitions/models.TronAgentType"
+                },
+                "avg_duration_ms": {
+                    "type": "integer"
+                },
+                "failed_runs": {
+                    "type": "integer"
+                },
+                "is_running": {
+                    "type": "boolean"
+                },
+                "last_run_at": {
+                    "type": "string"
+                },
+                "last_run_success": {
+                    "type": "boolean"
+                },
+                "successful_runs": {
+                    "type": "integer"
+                },
+                "total_cost_usd": {
+                    "type": "number"
+                },
+                "total_runs": {
+                    "type": "integer"
+                },
+                "total_tokens": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronAgentType": {
+            "type": "string",
+            "enum": [
+                "orchestrator",
+                "board",
+                "pm",
+                "dev",
+                "qa",
+                "integration"
+            ],
+            "x-enum-varnames": [
+                "AgentTypeOrchestrator",
+                "AgentTypeBoard",
+                "AgentTypePM",
+                "AgentTypeDev",
+                "AgentTypeQA",
+                "AgentTypeIntegration"
+            ]
+        },
+        "models.TronAgentsStatusResponse": {
+            "type": "object",
+            "properties": {
+                "agents": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronAgentStatus"
+                    }
+                },
+                "cycle_running": {
+                    "type": "boolean"
+                },
+                "next_cycle_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronDailyMetrics": {
+            "type": "object",
+            "properties": {
+                "commits": {
+                    "type": "integer"
+                },
+                "cost_usd": {
+                    "type": "number"
+                },
+                "date": {
+                    "description": "YYYY-MM-DD",
+                    "type": "string"
+                },
+                "tasks_completed": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronDecision": {
+            "type": "object",
+            "properties": {
+                "agent_type": {
+                    "$ref": "#/definitions/models.TronAgentType"
+                },
+                "chosen_option": {
+                    "type": "string"
+                },
+                "context": {
+                    "description": "Additional context",
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "default_option": {
+                    "description": "Which option to use on timeout",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "level": {
+                    "$ref": "#/definitions/models.TronDecisionLevel"
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronDecisionOption"
+                    }
+                },
+                "project_id": {
+                    "type": "string"
+                },
+                "repo_id": {
+                    "type": "string"
+                },
+                "resolved_at": {
+                    "type": "string"
+                },
+                "resolved_by": {
+                    "description": "\"user\" or \"timeout\" or \"auto\"",
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/models.TronDecisionStatus"
+                },
+                "task_id": {
+                    "type": "string"
+                },
+                "timeout_at": {
+                    "description": "When to auto-resolve",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronDecisionLevel": {
+            "type": "integer",
+            "enum": [
+                1,
+                2,
+                3
+            ],
+            "x-enum-comments": {
+                "DecisionLevelCritical": "Critical, needs attention",
+                "DecisionLevelInfo": "Just informational",
+                "DecisionLevelNormal": "Normal decision"
+            },
+            "x-enum-descriptions": [
+                "Just informational",
+                "Normal decision",
+                "Critical, needs attention"
+            ],
+            "x-enum-varnames": [
+                "DecisionLevelInfo",
+                "DecisionLevelNormal",
+                "DecisionLevelCritical"
+            ]
+        },
+        "models.TronDecisionListResponse": {
+            "type": "object",
+            "properties": {
+                "decisions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronDecision"
+                    }
+                },
+                "pending": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronDecisionOption": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "impact": {
+                    "description": "What happens if chosen",
+                    "type": "string"
+                },
+                "is_default": {
+                    "description": "Used if timeout",
+                    "type": "boolean"
+                },
+                "label": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronDecisionStatus": {
+            "type": "string",
+            "enum": [
+                "pending",
+                "approved",
+                "rejected",
+                "timeout",
+                "auto"
+            ],
+            "x-enum-comments": {
+                "DecisionStatusAuto": "Automatically resolved",
+                "DecisionStatusTimeout": "Auto-resolved by default"
+            },
+            "x-enum-descriptions": [
+                "",
+                "",
+                "",
+                "Auto-resolved by default",
+                "Automatically resolved"
+            ],
+            "x-enum-varnames": [
+                "DecisionStatusPending",
+                "DecisionStatusApproved",
+                "DecisionStatusRejected",
+                "DecisionStatusTimeout",
+                "DecisionStatusAuto"
+            ]
+        },
+        "models.TronDirective": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "content": {
+                    "description": "The directive text",
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "expires_at": {
+                    "description": "Optional expiration",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "priority": {
+                    "$ref": "#/definitions/models.TronDirectivePriority"
+                },
+                "project_id": {
+                    "type": "string"
+                },
+                "repo_id": {
+                    "description": "If scope is repo",
+                    "type": "string"
+                },
+                "scope": {
+                    "$ref": "#/definitions/models.TronDirectiveScope"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronDirectiveListResponse": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "integer"
+                },
+                "directives": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronDirective"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronDirectivePriority": {
+            "type": "string",
+            "enum": [
+                "normal",
+                "high",
+                "critical"
+            ],
+            "x-enum-varnames": [
+                "DirectivePriorityNormal",
+                "DirectivePriorityHigh",
+                "DirectivePriorityCritical"
+            ]
+        },
+        "models.TronDirectiveScope": {
+            "type": "string",
+            "enum": [
+                "project",
+                "repo"
+            ],
+            "x-enum-comments": {
+                "DirectiveScopeProject": "Applies to all repos",
+                "DirectiveScopeRepo": "Applies to specific repo"
+            },
+            "x-enum-descriptions": [
+                "Applies to all repos",
+                "Applies to specific repo"
+            ],
+            "x-enum-varnames": [
+                "DirectiveScopeProject",
+                "DirectiveScopeRepo"
+            ]
+        },
+        "models.TronFrequency": {
+            "type": "string",
+            "enum": [
+                "normal",
+                "high",
+                "low"
+            ],
+            "x-enum-varnames": [
+                "FrequencyNormal",
+                "FrequencyHigh",
+                "FrequencyLow"
+            ]
+        },
+        "models.TronMetricsResponse": {
+            "type": "object",
+            "properties": {
+                "by_agent": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronAgentMetrics"
+                    }
+                },
+                "by_repo": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronRepoMetrics"
+                    }
+                },
+                "daily": {
+                    "description": "Last 30 days",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronDailyMetrics"
+                    }
+                },
+                "month": {
+                    "$ref": "#/definitions/models.TronMetricsSummary"
+                },
+                "today": {
+                    "$ref": "#/definitions/models.TronMetricsSummary"
+                },
+                "week": {
+                    "$ref": "#/definitions/models.TronMetricsSummary"
+                }
+            }
+        },
+        "models.TronMetricsSummary": {
+            "type": "object",
+            "properties": {
+                "approval_rate": {
+                    "description": "Percentage",
+                    "type": "number"
+                },
+                "avg_cost_per_task": {
+                    "type": "number"
+                },
+                "commits_streak": {
+                    "description": "Days",
+                    "type": "integer"
+                },
+                "commits_total": {
+                    "type": "integer"
+                },
+                "period": {
+                    "description": "\"today\", \"week\", \"month\"",
+                    "type": "string"
+                },
+                "tasks_completed": {
+                    "type": "integer"
+                },
+                "tasks_rejected": {
+                    "type": "integer"
+                },
+                "total_cost_usd": {
+                    "type": "number"
+                },
+                "total_tokens": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronProject": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "daily_budget": {
+                    "description": "Max daily spend in USD",
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "directives": {
+                    "description": "IDs of TronDirective",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "frequency": {
+                    "description": "How often to run cycles",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.TronFrequency"
+                        }
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "description": "Whether agents should run",
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "references": {
+                    "description": "Market references (competitor URLs)",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "repos": {
+                    "description": "IDs of TronRepo",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronProjectResponse": {
+            "type": "object",
+            "properties": {
+                "active_directive": {
+                    "type": "string"
+                },
+                "commits_today": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "daily_budget": {
+                    "description": "Max daily spend in USD",
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "directives": {
+                    "description": "IDs of TronDirective",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "frequency": {
+                    "description": "How often to run cycles",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.TronFrequency"
+                        }
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "description": "Whether agents should run",
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "references": {
+                    "description": "Market references (competitor URLs)",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "repos": {
+                    "description": "IDs of TronRepo",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "repos_count": {
+                    "type": "integer"
+                },
+                "tasks_completed": {
+                    "type": "integer"
+                },
+                "tasks_in_backlog": {
+                    "type": "integer"
+                },
+                "today_cost_usd": {
+                    "type": "number"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronQAChecks": {
+            "type": "object",
+            "properties": {
+                "build_passed": {
+                    "type": "boolean"
+                },
+                "coverage_change": {
+                    "description": "Positive or negative",
+                    "type": "number"
+                },
+                "linter_clean": {
+                    "type": "boolean"
+                },
+                "tests_passed": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "models.TronQAIssue": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "type": "string"
+                },
+                "issue": {
+                    "type": "string"
+                },
+                "line": {
+                    "type": "integer"
+                },
+                "severity": {
+                    "description": "minor, major",
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronQAResult": {
+            "type": "object",
+            "properties": {
+                "checks": {
+                    "$ref": "#/definitions/models.TronQAChecks"
+                },
+                "feedback": {
+                    "type": "string"
+                },
+                "issues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronQAIssue"
+                    }
+                },
+                "result": {
+                    "description": "APPROVED, NEEDS_FIX, REJECTED",
+                    "type": "string"
+                },
+                "reviewed_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronRepo": {
+            "type": "object",
+            "properties": {
+                "analysis": {
+                    "$ref": "#/definitions/models.TronRepoAnalysis"
+                },
+                "claude_md_exists": {
+                    "description": "Has CLAUDE.md file",
+                    "type": "boolean"
+                },
+                "commits_streak": {
+                    "description": "Days with consecutive commits",
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "current_version": {
+                    "type": "string"
+                },
+                "dependencies": {
+                    "description": "Other repos this depends on",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "github_url": {
+                    "type": "string"
+                },
+                "health": {
+                    "$ref": "#/definitions/models.TronRepoHealth"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "last_analyzed_at": {
+                    "type": "string"
+                },
+                "last_commit_at": {
+                    "type": "string"
+                },
+                "local_path": {
+                    "description": "Path where repo is cloned",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "string"
+                },
+                "stack": {
+                    "$ref": "#/definitions/models.TronStack"
+                },
+                "test_coverage": {
+                    "type": "number"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronRepoAnalysis": {
+            "type": "object",
+            "properties": {
+                "analyzed_at": {
+                    "type": "string"
+                },
+                "dependencies": {
+                    "description": "Major dependencies",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "endpoints": {
+                    "description": "Detected API endpoints",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "features": {
+                    "description": "Detected features",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "file_count": {
+                    "description": "Total files",
+                    "type": "integer"
+                },
+                "lines_of_code": {
+                    "description": "Total LOC",
+                    "type": "integer"
+                },
+                "models": {
+                    "description": "Detected models/entities",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "patterns": {
+                    "description": "Detected patterns (MVC, Clean Arch, etc)",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "summary": {
+                    "description": "AI-generated summary",
+                    "type": "string"
+                },
+                "test_files": {
+                    "description": "Number of test files",
+                    "type": "integer"
+                },
+                "todos": {
+                    "description": "Found TODOs/FIXMEs",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "models.TronRepoHealth": {
+            "type": "string",
+            "enum": [
+                "green",
+                "yellow",
+                "red"
+            ],
+            "x-enum-varnames": [
+                "HealthGreen",
+                "HealthYellow",
+                "HealthRed"
+            ]
+        },
+        "models.TronRepoMetrics": {
+            "type": "object",
+            "properties": {
+                "commits_total": {
+                    "type": "integer"
+                },
+                "cost_usd": {
+                    "type": "number"
+                },
+                "health": {
+                    "$ref": "#/definitions/models.TronRepoHealth"
+                },
+                "repo_id": {
+                    "type": "string"
+                },
+                "repo_name": {
+                    "type": "string"
+                },
+                "tasks_completed": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronRepoResponse": {
+            "type": "object",
+            "properties": {
+                "analysis": {
+                    "$ref": "#/definitions/models.TronRepoAnalysis"
+                },
+                "claude_md_exists": {
+                    "description": "Has CLAUDE.md file",
+                    "type": "boolean"
+                },
+                "commits_streak": {
+                    "description": "Days with consecutive commits",
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "current_version": {
+                    "type": "string"
+                },
+                "dependencies": {
+                    "description": "Other repos this depends on",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "github_url": {
+                    "type": "string"
+                },
+                "health": {
+                    "$ref": "#/definitions/models.TronRepoHealth"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "last_analyzed_at": {
+                    "type": "string"
+                },
+                "last_commit_at": {
+                    "type": "string"
+                },
+                "local_path": {
+                    "description": "Path where repo is cloned",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "string"
+                },
+                "stack": {
+                    "$ref": "#/definitions/models.TronStack"
+                },
+                "tasks_completed": {
+                    "type": "integer"
+                },
+                "tasks_in_backlog": {
+                    "type": "integer"
+                },
+                "tasks_in_dev": {
+                    "type": "integer"
+                },
+                "test_coverage": {
+                    "type": "number"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronSourceLens": {
+            "type": "string",
+            "enum": [
+                "market",
+                "expansion",
+                "persona",
+                "code",
+                "integration",
+                "directive"
+            ],
+            "x-enum-comments": {
+                "LensCode": "Code analysis (debt, tests)",
+                "LensDirective": "CIO directive",
+                "LensExpansion": "Expand from last feature",
+                "LensIntegration": "Cross-repo update",
+                "LensMarket": "Mirror market reference",
+                "LensPersona": "User persona perspective"
+            },
+            "x-enum-descriptions": [
+                "Mirror market reference",
+                "Expand from last feature",
+                "User persona perspective",
+                "Code analysis (debt, tests)",
+                "Cross-repo update",
+                "CIO directive"
+            ],
+            "x-enum-varnames": [
+                "LensMarket",
+                "LensExpansion",
+                "LensPersona",
+                "LensCode",
+                "LensIntegration",
+                "LensDirective"
+            ]
+        },
+        "models.TronStack": {
+            "type": "object",
+            "properties": {
+                "database": {
+                    "description": "mongodb, postgres, mysql, etc",
+                    "type": "string"
+                },
+                "framework": {
+                    "description": "gin, nextjs, flutter, fastapi, etc",
+                    "type": "string"
+                },
+                "language": {
+                    "description": "go, typescript, dart, python, etc",
+                    "type": "string"
+                },
+                "tools": {
+                    "description": "docker, kubernetes, github-actions, etc",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "models.TronTask": {
+            "type": "object",
+            "properties": {
+                "branch_name": {
+                    "type": "string"
+                },
+                "commits": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronTaskCommit"
+                    }
+                },
+                "completed_at": {
+                    "type": "string"
+                },
+                "cost_usd": {
+                    "description": "Total cost of this task",
+                    "type": "number"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "depends_on": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "dev_attempts": {
+                    "description": "Max 3",
+                    "type": "integer"
+                },
+                "estimated_size": {
+                    "$ref": "#/definitions/models.TronTaskSize"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "priority": {
+                    "$ref": "#/definitions/models.TronTaskPriority"
+                },
+                "project_id": {
+                    "type": "string"
+                },
+                "qa_result": {
+                    "$ref": "#/definitions/models.TronQAResult"
+                },
+                "reasoning": {
+                    "description": "Why this task was generated",
+                    "type": "string"
+                },
+                "repo_id": {
+                    "type": "string"
+                },
+                "source_lens": {
+                    "$ref": "#/definitions/models.TronSourceLens"
+                },
+                "spec": {
+                    "$ref": "#/definitions/models.TronTaskSpec"
+                },
+                "started_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/models.TronTaskStatus"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "tokens_used": {
+                    "type": "integer"
+                },
+                "unlocks": {
+                    "description": "What this task enables",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronTaskCommit": {
+            "type": "object",
+            "properties": {
+                "additions": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deletions": {
+                    "type": "integer"
+                },
+                "files_changed": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "sha": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronTaskListResponse": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "tasks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.TronTask"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.TronTaskPriority": {
+            "type": "string",
+            "enum": [
+                "low",
+                "normal",
+                "high",
+                "critical"
+            ],
+            "x-enum-varnames": [
+                "PriorityLow",
+                "PriorityNormal",
+                "PriorityHigh",
+                "PriorityCritical"
+            ]
+        },
+        "models.TronTaskSize": {
+            "type": "string",
+            "enum": [
+                "small",
+                "medium",
+                "large"
+            ],
+            "x-enum-comments": {
+                "TaskSizeLarge": "4+ commits",
+                "TaskSizeMedium": "2-3 commits",
+                "TaskSizeSmall": "1 commit"
+            },
+            "x-enum-descriptions": [
+                "1 commit",
+                "2-3 commits",
+                "4+ commits"
+            ],
+            "x-enum-varnames": [
+                "TaskSizeSmall",
+                "TaskSizeMedium",
+                "TaskSizeLarge"
+            ]
+        },
+        "models.TronTaskSpec": {
+            "type": "object",
+            "properties": {
+                "acceptance_criteria": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "edge_cases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "files_to_create": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "files_to_modify": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "tests_required": {
+                    "type": "boolean"
+                },
+                "what": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TronTaskStatus": {
+            "type": "string",
+            "enum": [
+                "backlog",
+                "ready",
+                "in_dev",
+                "in_review",
+                "done",
+                "rejected"
+            ],
+            "x-enum-comments": {
+                "TaskStatusReady": "Approved by PM, ready for dev"
+            },
+            "x-enum-descriptions": [
+                "",
+                "Approved by PM, ready for dev",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "x-enum-varnames": [
+                "TaskStatusBacklog",
+                "TaskStatusReady",
+                "TaskStatusInDev",
+                "TaskStatusInReview",
+                "TaskStatusDone",
+                "TaskStatusRejected"
+            ]
+        },
+        "models.UpdateConnectedAccountRequest": {
+            "type": "object",
+            "properties": {
+                "account_name": {
+                    "type": "string"
+                },
+                "balance": {
+                    "type": "number"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "models.UpdateProfileRequest": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "bio": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "settings": {
+                    "$ref": "#/definitions/models.ProfileSettings"
+                }
+            }
+        },
+        "models.UpdateTransactionRequest": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "category": {
+                    "$ref": "#/definitions/models.TransactionCategory"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/models.TransactionType"
+                }
+            }
+        },
+        "models.UpdateTronProjectRequest": {
+            "type": "object",
+            "properties": {
+                "daily_budget": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "frequency": {
+                    "$ref": "#/definitions/models.TronFrequency"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "references": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "models.UpdateTronTaskRequest": {
+            "type": "object",
+            "properties": {
+                "priority": {
+                    "$ref": "#/definitions/models.TronTaskPriority"
+                },
+                "status": {
+                    "$ref": "#/definitions/models.TronTaskStatus"
+                }
+            }
+        },
+        "models.UserResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "description": "Digite: Bearer {seu_token_aqui}",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

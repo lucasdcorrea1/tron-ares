@@ -1,0 +1,26 @@
+{
+  "id": "architecture/overview",
+  "title": "Visao Geral da Arquitetura",
+  "description": "O backend segue uma arquitetura em camadas para garantir separacao de responsabilidades.",
+  "source": "@site/docs/architecture/overview.md",
+  "sourceDirName": "architecture",
+  "slug": "/architecture/overview",
+  "permalink": "/architecture/overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Padrao de Documentacao",
+    "permalink": "/guides/documentation-standards"
+  },
+  "next": {
+    "title": "Banco de Dados",
+    "permalink": "/architecture/database"
+  }
+}

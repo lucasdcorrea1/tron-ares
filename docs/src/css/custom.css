@@ -1,0 +1,412 @@
+/* Discord Style Theme */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --discord-blurple: #5865f2;
+  --discord-green: #57f287;
+  --discord-yellow: #fee75c;
+  --discord-fuchsia: #eb459e;
+  --discord-red: #ed4245;
+
+  --ifm-color-primary: #5865f2;
+  --ifm-color-primary-dark: #4752c4;
+  --ifm-color-primary-darker: #3c45a5;
+  --ifm-color-primary-darkest: #2e3680;
+  --ifm-color-primary-light: #7983f5;
+  --ifm-color-primary-lighter: #9ba3f7;
+  --ifm-color-primary-lightest: #bcc3fa;
+
+  --bg-primary: #1e1f22;
+  --bg-secondary: #2b2d31;
+  --bg-tertiary: #313338;
+  --bg-modifier: #383a40;
+
+  --text-normal: #dbdee1;
+  --text-muted: #949ba4;
+  --text-link: #00aff4;
+
+  --ifm-background-color: var(--bg-primary);
+  --ifm-background-surface-color: var(--bg-secondary);
+  --ifm-navbar-background-color: var(--bg-secondary);
+  --ifm-footer-background-color: var(--bg-primary);
+
+  --ifm-font-family-base: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', monospace;
+  --ifm-heading-font-weight: 700;
+  --ifm-code-font-size: 0.85rem;
+
+  --border-color: #3f4147;
+  --ifm-toc-border-color: var(--border-color);
+}
+
+html[data-theme='dark'] {
+  --ifm-background-color: var(--bg-primary);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  background: var(--bg-secondary);
+  border-bottom: none;
+  box-shadow: 0 1px 0 rgba(0,0,0,.2), 0 1.5px 0 rgba(0,0,0,.05), 0 2px 0 rgba(0,0,0,.05);
+  padding: 0 1.5rem;
+  height: 60px;
+}
+
+.navbar__title {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: white;
+}
+
+.navbar__link {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navbar__link:hover {
+  color: var(--text-normal);
+  background: var(--bg-modifier);
+}
+
+.navbar__link--active {
+  color: white;
+}
+
+/* ========== SIDEBAR ========== */
+.theme-doc-sidebar-container {
+  background: var(--bg-secondary);
+  border-right: none !important;
+}
+
+.menu {
+  background: var(--bg-secondary);
+  padding: 0.75rem;
+}
+
+.menu__link {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 2px 0;
+  transition: all 0.1s;
+}
+
+.menu__link:hover {
+  background: var(--bg-modifier);
+  color: var(--text-normal);
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  background: rgba(88, 101, 242, 0.2);
+  color: white;
+}
+
+.menu__list-item-collapsible > .menu__link {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.menu__caret::before {
+  filter: brightness(0.7);
+}
+
+/* ========== MAIN CONTENT ========== */
+.main-wrapper {
+  background: var(--bg-tertiary);
+}
+
+.docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module {
+  background: var(--bg-tertiary);
+}
+
+article {
+  max-width: 860px;
+  padding: 2rem;
+}
+
+/* ========== TYPOGRAPHY ========== */
+.markdown h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.markdown h2 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.markdown h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown p {
+  color: var(--text-normal);
+  line-height: 1.625;
+  font-size: 1rem;
+}
+
+.markdown strong {
+  color: white;
+  font-weight: 600;
+}
+
+.markdown a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+
+.markdown a:hover {
+  text-decoration: underline;
+}
+
+.markdown ul, .markdown ol {
+  color: var(--text-normal);
+}
+
+/* ========== CODE ========== */
+code {
+  background: var(--bg-primary);
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+  font-size: 0.85em;
+  color: #e8912d;
+  border: none;
+}
+
+pre {
+  background: var(--bg-primary) !important;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 1rem !important;
+}
+
+pre code {
+  background: transparent !important;
+  color: var(--text-normal);
+  padding: 0;
+}
+
+/* ========== TABLES ========== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.9375rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+th {
+  background: var(--bg-modifier);
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+td {
+  padding: 12px 16px;
+  color: var(--text-normal);
+  border-top: 1px solid var(--border-color);
+}
+
+tr:hover td {
+  background: var(--bg-modifier);
+}
+
+/* ========== API BADGES ========== */
+.api-method {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  font-family: var(--ifm-font-family-monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.api-method--get {
+  background: rgba(87, 242, 135, 0.15);
+  color: var(--discord-green);
+}
+
+.api-method--post {
+  background: rgba(88, 101, 242, 0.2);
+  color: #8b9dff;
+}
+
+.api-method--put {
+  background: rgba(254, 231, 92, 0.15);
+  color: var(--discord-yellow);
+}
+
+.api-method--patch {
+  background: rgba(235, 69, 158, 0.15);
+  color: var(--discord-fuchsia);
+}
+
+.api-method--delete {
+  background: rgba(237, 66, 69, 0.15);
+  color: var(--discord-red);
+}
+
+/* ========== ADMONITIONS ========== */
+.alert {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid;
+}
+
+.alert--info {
+  border-left-color: var(--discord-blurple);
+}
+
+.alert--success {
+  border-left-color: var(--discord-green);
+}
+
+.alert--warning {
+  border-left-color: var(--discord-yellow);
+}
+
+.alert--danger {
+  border-left-color: var(--discord-red);
+}
+
+/* ========== TOC ========== */
+.table-of-contents {
+  border-left: 2px solid var(--border-color);
+}
+
+.table-of-contents__link {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.table-of-contents__link:hover {
+  color: var(--text-normal);
+}
+
+.table-of-contents__link--active {
+  color: white;
+  font-weight: 600;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+}
+
+.footer__title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.footer__link-item {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.footer__link-item:hover {
+  color: var(--text-normal);
+}
+
+.footer__copyright {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-modifier);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4e5058;
+}
+
+/* ========== HR ========== */
+hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+/* ========== BLOCKQUOTE ========== */
+blockquote {
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--discord-blurple);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+blockquote p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ========== SELECTION ========== */
+::selection {
+  background: rgba(88, 101, 242, 0.4);
+}
+
+/* ========== BUTTONS (if any) ========== */
+.button--primary {
+  background: var(--discord-blurple);
+  border: none;
+  color: white;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.button--primary:hover {
+  background: #4752c4;
+}

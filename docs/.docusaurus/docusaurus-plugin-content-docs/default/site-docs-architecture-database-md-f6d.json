@@ -1,0 +1,22 @@
+{
+  "id": "architecture/database",
+  "title": "Banco de Dados",
+  "description": "O Imperium utiliza PostgreSQL como banco de dados principal.",
+  "source": "@site/docs/architecture/database.md",
+  "sourceDirName": "architecture",
+  "slug": "/architecture/database",
+  "permalink": "/architecture/database",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Visao Geral da Arquitetura",
+    "permalink": "/architecture/overview"
+  }
+}

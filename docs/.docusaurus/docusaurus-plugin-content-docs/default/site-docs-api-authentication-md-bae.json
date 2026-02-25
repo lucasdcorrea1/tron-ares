@@ -1,0 +1,26 @@
+{
+  "id": "api/authentication",
+  "title": "Autenticacao",
+  "description": "O Imperium utiliza JWT (JSON Web Tokens) para autenticacao.",
+  "source": "@site/docs/api/authentication.md",
+  "sourceDirName": "api",
+  "slug": "/api/authentication",
+  "permalink": "/api/authentication",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Models",
+    "permalink": "/api/models"
+  },
+  "next": {
+    "title": "Setup do Ambiente",
+    "permalink": "/guides/setup"
+  }
+}

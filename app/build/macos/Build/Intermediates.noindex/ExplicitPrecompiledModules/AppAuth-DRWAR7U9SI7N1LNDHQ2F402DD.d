@@ -1,0 +1,45 @@
+moduledependenciestarget: \
+  /Users/iultra/Documents/Imperium-App/app/build/macos/Build/Intermediates.noindex/Pods.build/Debug/AppAuth.build/module.modulemap \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/Target\ Support\ Files/AppAuth/AppAuth-umbrella.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/System/Library/Frameworks/Cocoa.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/usr/include/DarwinFoundation1.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/System/Library/Frameworks/CoreServices.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/System/Library/Frameworks/AppKit.framework/Modules/module.modulemap \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDAuthState.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDAuthStateChangeDelegate.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDAuthStateErrorDelegate.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationRequest.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgentRequest.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDResponseTypes.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDScopes.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationResponse.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationService.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDError.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDErrorUtilities.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgent.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgentSession.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDGrantTypes.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDIDToken.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDRegistrationRequest.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDRegistrationResponse.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDScopeUtilities.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDServiceConfiguration.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDServiceDiscovery.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDTokenRequest.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDTokenResponse.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDTokenUtilities.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDURLSessionProvider.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDEndSessionRequest.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDEndSessionResponse.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDClientMetadataParameters.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDDefines.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDFieldMapping.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuthCore/OIDURLQueryComponent.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuth.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuth/macOS/OIDAuthState+Mac.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuth/macOS/OIDAuthorizationService+Mac.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuth/macOS/OIDExternalUserAgentMac.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuth/macOS/OIDRedirectHTTPHandler.h \
+  /Users/iultra/Documents/Imperium-App/app/macos/Pods/AppAuth/Sources/AppAuth/macOS/LoopbackHTTPServer/OIDLoopbackHTTPServer.h

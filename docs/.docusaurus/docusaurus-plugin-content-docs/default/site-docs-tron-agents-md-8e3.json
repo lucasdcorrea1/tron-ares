@@ -1,0 +1,17 @@
+{
+  "id": "tron/agents",
+  "title": "TRON Agents",
+  "description": "Documentacao detalhada de cada agente do sistema TRON.",
+  "source": "@site/docs/tron/agents.md",
+  "sourceDirName": "tron",
+  "slug": "/tron/agents",
+  "permalink": "/tron/agents",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  }
+}

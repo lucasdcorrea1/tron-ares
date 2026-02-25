@@ -1,0 +1,26 @@
+{
+  "id": "guides/documentation-standards",
+  "title": "Padrao de Documentacao",
+  "description": "Guia para manter a documentacao consistente entre Swagger e Docusaurus.",
+  "source": "@site/docs/guides/documentation-standards.md",
+  "sourceDirName": "guides",
+  "slug": "/guides/documentation-standards",
+  "permalink": "/guides/documentation-standards",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Deployment",
+    "permalink": "/guides/deployment"
+  },
+  "next": {
+    "title": "Visao Geral da Arquitetura",
+    "permalink": "/architecture/overview"
+  }
+}
