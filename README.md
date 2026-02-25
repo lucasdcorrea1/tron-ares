@@ -288,3 +288,7 @@ docker-compose logs -f
 - [Documentacao](http://localhost:3000)
 - [Grafana](http://localhost:3001)
 - [Mongo Express](http://localhost:8081)
+
+
+lucas e Kaio
+Co-authored-by: kaiofgl <kaiolazaro36@hotmail.com>
